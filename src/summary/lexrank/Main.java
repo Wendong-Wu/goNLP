@@ -18,6 +18,9 @@ public class Main {
 		sv.add(new SentenceVector(ls2));
 		sv.add(new SentenceVector(ls3));
 		sv.add(new SentenceVector(ls4));
+		if (0 == ls4[0]){
+			
+		}
 		
 		LexRank lr = new LexRank(sv, 0.001);
 		

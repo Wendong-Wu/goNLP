@@ -55,7 +55,7 @@ public class LexRank {
 	}
 	
 	private void powerMethod(double dampFactor) {
-		double magDiff = 1000000;
+		double magDiff = epsilon + 100000;
 		double size = (double)sentences.size();
 		lexScore = new double[sentences.size()];
 		double [] lexScoreNext = new double[sentences.size()];
