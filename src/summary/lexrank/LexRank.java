@@ -6,9 +6,17 @@ import java.util.ArrayList;
 import summary.snippets.tfidf.SentenceVector;
 import summary.lexrank.Vector;
 
+/*
+ * Implement the LexRank algorithm of Erkan and Radev. 
+ * The LexRank class takes the tf-idf vectors of sentences to compute 
+ * their lexical centrality. It uses the epsilon value to determine
+ * the convergence of the algorithm. 
+ */
+
 public class LexRank {
 	
 	private double epsilon = 0.0;
+	private double dampingFactor = 0.85;
 	private ArrayList<SentenceVector> sentences;
 	private double [][] cosineMatrix;
 	private int [] degree;
@@ -19,11 +27,15 @@ public class LexRank {
 		this.epsilon = epsilon; 
 		init();;
 		buildCosineMatrix();
-		powerMethod(0.2);
+		powerMethod(this.dampingFactor);
 	}
 	
 	public double[] getLexScore() {
 		return this.lexScore;
+	}
+	
+	public void setDampingFactor(double dampingFactor) {
+		this.dampingFactor = dampingFactor;
 	}
 	
 	private void init() {
@@ -48,7 +60,6 @@ public class LexRank {
 			}
 		}
 	}
-	
 	
 	private double idfModifiedCosine(SentenceVector x, SentenceVector y) {
 		return Vector.dotProduct(x.getVector(), y.getVector());
